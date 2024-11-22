@@ -1,7 +1,10 @@
+version: "3.8"
+
 services:
-  users_api:
+  # Microservicio de Vehicles
+  vehicles_api:
     build:
-      context: ./APIS
+      context: ./APIS/vehicles
     deploy:
       replicas: 1
       resources:
@@ -12,10 +15,7 @@ services:
           cpus: "0.1"
           memory: 256M
     ports:
-      - "3000:3000"
-    volumes:
-      - ./APIS/vehicles:/usr/vehiclesAPI
-      - ./logs/users_api:/usr/src/app/logs  # Persistir logs de la API
+      - "3001:3001"
     depends_on:
       - postgres
     environment:
@@ -26,10 +26,79 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  # Microservicio de Fichas
+  fichas_api:
+    build:
+      context: ./APIS/fichas
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 512M
+        reservations:
+          cpus: "0.1"
+          memory: 256M
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: "postgresql://root:root@postgres:5432/vehiculos_db?schema=public"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Microservicio de Users
+  users_api:
+    build:
+      context: ./APIS/users
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 512M
+        reservations:
+          cpus: "0.1"
+          memory: 256M
+    ports:
+      - "3003:3003"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: "postgresql://root:root@postgres:5432/vehiculos_db?schema=public"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # API Gateway
+  api_gateway:
+    build:
+      context: ./api-gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - vehicles_api
+      - fichas_api
+      - users_api
+    environment:
+      NODE_ENV: production
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # PostgreSQL
   postgres:
     build:
       context: .
-      dockerfile: Dockerfile.postgres_audit  # Usa el Dockerfile.postgres_audit personalizado
+      dockerfile: Dockerfile.postgres_audit
     container_name: postgres
     environment:
       POSTGRES_DB: vehiculos_db
@@ -39,14 +108,15 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./pg_logs/postgresql:/var/log/postgresql  # Persistir logs de PostgreSQL
-      - ./postgresql_configs/postgresql.conf:/etc/postgresql/postgresql.conf # Configuración personalizada
+      - ./pg_logs/postgresql:/var/log/postgresql
+      - ./postgresql_configs/postgresql.conf:/etc/postgresql/postgresql.conf
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
 
+  # pgAdmin (opcional)
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -58,7 +128,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./logs/pgadmin:/var/log/pgadmin  # Persistir logs de pgAdmin
+      - ./logs/pgadmin:/var/log/pgadmin
     logging:
       driver: "json-file"
       options:

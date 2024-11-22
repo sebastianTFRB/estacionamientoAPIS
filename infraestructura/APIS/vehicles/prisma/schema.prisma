@@ -20,7 +20,6 @@ model Vehiculo {
 
   carro     Carro?   @relation("CarroVehiculo")  // Relación opcional
   moto      Moto?    @relation("MotoVehiculo")   // Relación opcional
-  ficha     Ficha?   @relation("VehiculoFicha")  // Relación inversa
 }
 
 model Carro {
