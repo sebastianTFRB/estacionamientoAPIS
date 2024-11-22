@@ -1,0 +1,110 @@
+2024-11-22 06:41:13.995 GMT [1] LOG:  starting PostgreSQL 17.1 (Debian 17.1-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2024-11-22 06:41:13.995 GMT [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2024-11-22 06:41:13.996 GMT [1] LOG:  listening on IPv6 address "::", port 5432
+2024-11-22 06:41:14.004 GMT [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2024-11-22 06:41:14.028 GMT [31] LOG:  database system was shut down at 2024-11-22 06:38:30 GMT
+2024-11-22 06:41:14.050 GMT [1] LOG:  database system is ready to accept connections
+2024-11-22 06:42:13.704 GMT [35] LOG:  statement: SET search_path = "public";
+	
+2024-11-22 06:42:13.704 GMT [35] LOG:  AUDIT: SESSION,1,1,MISC,SET,,,"SET search_path = ""public""",<not logged>
+2024-11-22 06:42:13.704 GMT [35] LOG:  duration: 0.303 ms
+2024-11-22 06:42:13.707 GMT [35] LOG:  duration: 0.513 ms  parse s0: SELECT version()
+2024-11-22 06:42:13.708 GMT [35] LOG:  AUDIT: SESSION,2,1,READ,SELECT,,,SELECT version(),<not logged>
+2024-11-22 06:42:13.708 GMT [35] LOG:  duration: 0.576 ms  bind s0: SELECT version()
+2024-11-22 06:42:13.708 GMT [35] LOG:  execute s0: SELECT version()
+2024-11-22 06:42:13.708 GMT [35] LOG:  duration: 0.027 ms
+2024-11-22 06:42:13.709 GMT [35] LOG:  duration: 0.660 ms  parse s1: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2024-11-22 06:42:13.710 GMT [35] LOG:  AUDIT: SESSION,3,1,READ,SELECT,,,"SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version",<not logged>
+2024-11-22 06:42:13.710 GMT [35] LOG:  duration: 0.753 ms  bind s1: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2024-11-22 06:42:13.710 GMT [35] DETAIL:  Parameters: $1 = 'public'
+2024-11-22 06:42:13.710 GMT [35] LOG:  execute s1: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2024-11-22 06:42:13.710 GMT [35] DETAIL:  Parameters: $1 = 'public'
+2024-11-22 06:42:13.710 GMT [35] LOG:  duration: 0.031 ms
+2024-11-22 06:42:13.711 GMT [35] LOG:  could not receive data from client: Connection reset by peer
+2024-11-22 06:42:14.397 GMT [37] LOG:  statement: SET search_path = "public";
+	
+2024-11-22 06:42:14.397 GMT [37] LOG:  AUDIT: SESSION,1,1,MISC,SET,,,"SET search_path = ""public""",<not logged>
+2024-11-22 06:42:14.397 GMT [37] LOG:  duration: 0.172 ms
+2024-11-22 06:42:14.399 GMT [37] LOG:  duration: 0.362 ms  parse s0: SELECT version()
+2024-11-22 06:42:14.400 GMT [37] LOG:  AUDIT: SESSION,2,1,READ,SELECT,,,SELECT version(),<not logged>
+2024-11-22 06:42:14.400 GMT [37] LOG:  duration: 0.231 ms  bind s0: SELECT version()
+2024-11-22 06:42:14.400 GMT [37] LOG:  execute s0: SELECT version()
+2024-11-22 06:42:14.400 GMT [37] LOG:  duration: 0.023 ms
+2024-11-22 06:42:14.400 GMT [37] LOG:  duration: 0.245 ms  parse s1: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2024-11-22 06:42:14.401 GMT [37] LOG:  AUDIT: SESSION,3,1,READ,SELECT,,,"SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version",<not logged>
+2024-11-22 06:42:14.401 GMT [37] LOG:  duration: 0.380 ms  bind s1: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2024-11-22 06:42:14.401 GMT [37] DETAIL:  Parameters: $1 = 'public'
+2024-11-22 06:42:14.401 GMT [37] LOG:  execute s1: SELECT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = $1), version(), current_setting('server_version_num')::integer as numeric_version;
+2024-11-22 06:42:14.401 GMT [37] DETAIL:  Parameters: $1 = 'public'
+2024-11-22 06:42:14.401 GMT [37] LOG:  duration: 0.027 ms
+2024-11-22 06:42:14.401 GMT [37] LOG:  statement: DROP SCHEMA "public" CASCADE
+2024-11-22 06:42:14.403 GMT [37] LOG:  AUDIT: SESSION,4,1,DDL,DROP SCHEMA,,,"DROP SCHEMA ""public"" CASCADE",<not logged>
+2024-11-22 06:42:14.405 GMT [37] LOG:  duration: 3.556 ms
+2024-11-22 06:42:14.405 GMT [37] LOG:  statement: CREATE SCHEMA "public"
+2024-11-22 06:42:14.406 GMT [37] LOG:  AUDIT: SESSION,5,1,DDL,CREATE SCHEMA,,,"CREATE SCHEMA ""public""",<not logged>
+2024-11-22 06:42:14.407 GMT [37] LOG:  duration: 1.379 ms
+2024-11-22 06:42:14.407 GMT [37] LOG:  statement: DROP TABLE _prisma_migrations
+2024-11-22 06:42:14.407 GMT [37] ERROR:  table "_prisma_migrations" does not exist
+2024-11-22 06:42:14.407 GMT [37] STATEMENT:  DROP TABLE _prisma_migrations
+2024-11-22 06:42:14.409 GMT [37] LOG:  statement: SELECT pg_advisory_lock(72707369)
+2024-11-22 06:42:14.410 GMT [37] LOG:  AUDIT: SESSION,6,1,READ,SELECT,,,SELECT pg_advisory_lock(72707369),<not logged>
+2024-11-22 06:42:14.410 GMT [37] LOG:  duration: 0.557 ms
+2024-11-22 06:42:14.410 GMT [37] LOG:  duration: 0.305 ms  parse s2: 
+	                SELECT tbl.relname AS table_name
+	                FROM pg_class AS tbl
+	                INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	                WHERE tbl.relkind = 'r' AND namespace.nspname = ANY ( $1 )
+	            
+2024-11-22 06:42:14.411 GMT [37] LOG:  AUDIT: SESSION,7,1,READ,SELECT,,,"SELECT tbl.relname AS table_name
+	                FROM pg_class AS tbl
+	                INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	                WHERE tbl.relkind = 'r' AND namespace.nspname = ANY ( $1 )",<not logged>
+2024-11-22 06:42:14.411 GMT [37] LOG:  duration: 0.940 ms  bind s2: 
+	                SELECT tbl.relname AS table_name
+	                FROM pg_class AS tbl
+	                INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	                WHERE tbl.relkind = 'r' AND namespace.nspname = ANY ( $1 )
+	            
+2024-11-22 06:42:14.411 GMT [37] DETAIL:  Parameters: $1 = '{public}'
+2024-11-22 06:42:14.411 GMT [37] LOG:  execute s2: 
+	                SELECT tbl.relname AS table_name
+	                FROM pg_class AS tbl
+	                INNER JOIN pg_namespace AS namespace ON namespace.oid = tbl.relnamespace
+	                WHERE tbl.relkind = 'r' AND namespace.nspname = ANY ( $1 )
+	            
+2024-11-22 06:42:14.411 GMT [37] DETAIL:  Parameters: $1 = '{public}'
+2024-11-22 06:42:14.412 GMT [37] LOG:  duration: 0.156 ms
+2024-11-22 06:42:14.412 GMT [37] LOG:  statement: CREATE TABLE _prisma_migrations (
+	    id                      VARCHAR(36) PRIMARY KEY NOT NULL,
+	    checksum                VARCHAR(64) NOT NULL,
+	    finished_at             TIMESTAMPTZ,
+	    migration_name          VARCHAR(255) NOT NULL,
+	    logs                    TEXT,
+	    rolled_back_at          TIMESTAMPTZ,
+	    started_at              TIMESTAMPTZ NOT NULL DEFAULT now(),
+	    applied_steps_count     INTEGER NOT NULL DEFAULT 0
+	);
+	
+2024-11-22 06:42:14.415 GMT [37] LOG:  AUDIT: SESSION,8,1,DDL,CREATE TABLE,,,"CREATE TABLE _prisma_migrations (
+	    id                      VARCHAR(36) PRIMARY KEY NOT NULL,
+	    checksum                VARCHAR(64) NOT NULL,
+	    finished_at             TIMESTAMPTZ,
+	    migration_name          VARCHAR(255) NOT NULL,
+	    logs                    TEXT,
+	    rolled_back_at          TIMESTAMPTZ,
+	    started_at              TIMESTAMPTZ NOT NULL DEFAULT now(),
+	    applied_steps_count     INTEGER NOT NULL DEFAULT 0
+	)",<not logged>
+2024-11-22 06:42:14.417 GMT [37] LOG:  duration: 4.758 ms
+2024-11-22 06:42:14.417 GMT [37] LOG:  duration: 0.383 ms  parse s3: SELECT "id", "checksum", "finished_at", "migration_name", "logs", "rolled_back_at", "started_at", "applied_steps_count" FROM "_prisma_migrations" ORDER BY "started_at" ASC
+2024-11-22 06:42:14.418 GMT [37] LOG:  AUDIT: SESSION,9,1,READ,SELECT,,,"SELECT ""id"", ""checksum"", ""finished_at"", ""migration_name"", ""logs"", ""rolled_back_at"", ""started_at"", ""applied_steps_count"" FROM ""_prisma_migrations"" ORDER BY ""started_at"" ASC",<not logged>
+2024-11-22 06:42:14.418 GMT [37] LOG:  duration: 0.347 ms  bind s3: SELECT "id", "checksum", "finished_at", "migration_name", "logs", "rolled_back_at", "started_at", "applied_steps_count" FROM "_prisma_migrations" ORDER BY "started_at" ASC
+2024-11-22 06:42:14.418 GMT [37] LOG:  execute s3: SELECT "id", "checksum", "finished_at", "migration_name", "logs", "rolled_back_at", "started_at", "applied_steps_count" FROM "_prisma_migrations" ORDER BY "started_at" ASC
+2024-11-22 06:42:14.418 GMT [37] LOG:  duration: 0.074 ms
+2024-11-22 06:42:41.682 GMT [1] LOG:  received fast shutdown request
+2024-11-22 06:42:41.686 GMT [1] LOG:  aborting any active transactions
+2024-11-22 06:42:41.693 GMT [1] LOG:  background worker "logical replication launcher" (PID 34) exited with exit code 1
+2024-11-22 06:42:41.694 GMT [29] LOG:  shutting down
+2024-11-22 06:42:41.698 GMT [29] LOG:  checkpoint starting: shutdown immediate
+2024-11-22 06:42:41.726 GMT [29] LOG:  checkpoint complete: wrote 38 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.015 s, total=0.032 s; sync files=35, longest=0.003 s, average=0.001 s; distance=159 kB, estimate=159 kB; lsn=0/6E532D8, redo lsn=0/6E532D8
+2024-11-22 06:42:41.732 GMT [1] LOG:  database system is shut down

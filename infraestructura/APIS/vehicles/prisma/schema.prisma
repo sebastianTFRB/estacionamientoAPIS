@@ -18,8 +18,18 @@ model Vehiculo {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  ficha     Ficha?   @relation("VehiculoFicha")  // Relación con Ficha
   carro     Carro?   @relation("CarroVehiculo")  // Relación opcional
   moto      Moto?    @relation("MotoVehiculo")   // Relación opcional
+}
+
+model Ficha {
+  id           Int      @id @default(autoincrement())
+  estadoPago   Boolean
+  fechaEntrada DateTime @default(now())
+  fechaSalida  DateTime?
+  vehiculoId   Int      @unique
+  vehiculo     Vehiculo @relation("VehiculoFicha", fields: [vehiculoId], references: [id]) // Relación con Vehiculo
 }
 
 model Carro {
