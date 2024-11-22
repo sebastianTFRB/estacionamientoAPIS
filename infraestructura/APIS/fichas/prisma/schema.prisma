@@ -1,0 +1,31 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Usamos una variable de entorno para la conexión
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Ficha {
+  id           Int      @id @default(autoincrement())
+  estadoPago   Boolean  // Estado del pago: true = pagado, false = no pagado
+  fechaEntrada DateTime @default(now()) // Fecha de entrada
+  fechaSalida  DateTime? // Fecha de salida
+  vehiculoId   Int      @unique
+  vehiculo     Vehiculo @relation(fields: [vehiculoId], references: [id], name: "VehiculoFicha")
+}
+
+model Vehiculo {
+  id        Int      @id @default(autoincrement())
+  placa     String   @unique
+  modelo    String
+  marca     String
+  color     String
+  tipo      String   // "carro" o "moto"
+  atributo  String?  // Atributo específico
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ficha     Ficha?   @relation("VehiculoFicha")  // Relación con Ficha
+}

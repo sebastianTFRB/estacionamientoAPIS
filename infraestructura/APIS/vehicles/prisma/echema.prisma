@@ -1,0 +1,38 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Usamos una variable de entorno para la conexión
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Vehiculo {
+  id        Int      @id @default(autoincrement())
+  placa     String   @unique
+  modelo    String
+  marca     String
+  color     String
+  tipo      String   // "carro" o "moto"
+  atributo  String?  // Atributo específico
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  carro     Carro?   @relation("CarroVehiculo")  // Relación opcional
+  moto      Moto?    @relation("MotoVehiculo")   // Relación opcional
+  ficha     Ficha?   @relation("VehiculoFicha")  // Relación inversa
+}
+
+model Carro {
+  id          Int      @id @default(autoincrement())
+  vehiculoID  Int      @unique
+  vehiculo    Vehiculo @relation("CarroVehiculo", fields: [vehiculoID], references: [id])
+  numPuertas  Int?     // Atributo específico para carro
+}
+
+model Moto {
+  id          Int      @id @default(autoincrement())
+  vehiculoID  Int      @unique
+  vehiculo    Vehiculo @relation("MotoVehiculo", fields: [vehiculoID], references: [id])
+  cilindraje  Int?     // Atributo específico para moto
+}
