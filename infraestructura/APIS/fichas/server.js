@@ -7,6 +7,11 @@ const PORT = 3002;
 
 app.use(cors());
 app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('Microservicio de fichasfuncionando correctamente');
+});
+
 app.use('/api/fichas', fichaRoutes);
 
 app.listen(PORT, () => {

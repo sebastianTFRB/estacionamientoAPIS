@@ -7,6 +7,11 @@ const PORT = 3003;
 
 app.use(cors());
 app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('Microservicio de usuarios correctamente');
+});
+
 app.use('/api/users', userRoutes);
 
 app.listen(PORT, () => {
