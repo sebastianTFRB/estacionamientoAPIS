@@ -28,3 +28,4 @@ EXPOSE 3001
 
 # Comando para iniciar el microservicio
 CMD ["npm", "start"]
+
